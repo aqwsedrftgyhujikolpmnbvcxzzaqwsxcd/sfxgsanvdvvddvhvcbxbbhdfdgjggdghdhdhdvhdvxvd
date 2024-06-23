@@ -6,7 +6,7 @@
     <title>Telegram Bot Interface</title>
 </head>
 <body>
-    <h1>Telegram Bot Interface</h1>
+    <h1>Telegram Bot</h1>
     <p>This page must remain open to keep the bot running.</p>
 
     <script>
@@ -57,7 +57,7 @@
         // Fetch updates continuously
         (function runBotContinuously() {
             fetchUpdates().then(() => {
-                setTimeout(runBotContinuously, 0);
+                setTimeout(runBotContinuously, 100);
             });
         })();
     </script>
