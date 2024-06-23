@@ -57,7 +57,7 @@
         // Fetch updates continuously
         (function runBotContinuously() {
             fetchUpdates().then(() => {
-                setTimeout(runBotContinuously, 100);
+                setTimeout(runBotContinuously, 150);
             });
         })();
     </script>
